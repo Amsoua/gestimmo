@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div class="row mat-elevation-z8">
     <mat-card class="col-8 mx-auto card">
-      
-        <mat-tab-group class="groupe" dynamicHeight mat-align-tabs="center" [selectedIndex]="selectedTab">
-          <mat-tab label="Reservation">
-              <form class="example-form" *ngIf="resaForm" [formGroup]="resaForm">
+
+      <mat-tab-group class="groupe" dynamicHeight mat-align-tabs="center" [selectedIndex]="selectedTab">
+        <mat-tab label="Reservation">
+          <form class="example-form" *ngIf="resaForm" [formGroup]="resaForm">
             <mat-card class="col-8 mx-auto cardSearch">
               <mat-card-title>
                 <mat-icon fontSet="fa" class="fas fa-user mx-auto"></mat-icon>
@@ -16,7 +16,7 @@
                   <tr>
                     <td>
                       <mat-form-field>
-                        <input matInput [matDatepicker]="pickerIn"  formControlName="dateCheckin"  placeholder="Choisir date CheckIn" >
+                        <input matInput [matDatepicker]="pickerIn" formControlName="dateCheckin" placeholder="Choisir date CheckIn">
                         <mat-error *ngIf="resaForm.get('dateCheckin').invalid">{{ getErrorMessageDateIN() }}</mat-error>
                         <mat-datepicker-toggle matSuffix [for]="pickerIn"></mat-datepicker-toggle>
                         <mat-datepicker #pickerIn></mat-datepicker>
@@ -24,24 +24,24 @@
                     </td>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <td>
-                      <mat-form-field >
+                      <mat-form-field>
                         <input matInput [matDatepicker]="pickerOut" required formControlName="dateCheckout" placeholder="Choisir date CheckOut">
                         <mat-error *ngIf="resaForm.get('dateCheckout').invalid">{{ getErrorMessageDateOut() }}</mat-error>
                         <mat-datepicker-toggle matSuffix [for]="pickerOut"></mat-datepicker-toggle>
-                        <mat-datepicker #pickerOut ></mat-datepicker>
+                        <mat-datepicker #pickerOut></mat-datepicker>
                       </mat-form-field>
                     </td>
                   </tr>
                   <tr>
                     <td>
                       <mat-form-field>
-                        <input matInput formControlName="prix" placeholder="Prix" >
+                        <input matInput formControlName="prix" myNumberOnly placeholder="Prix">
                       </mat-form-field>
                     </td>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <td>
                       <mat-form-field>
-                        <mat-select formControlName="statut" placeholder="Statut Réservation" >
+                        <mat-select formControlName="statut" placeholder="Statut Réservation">
                           <mat-option>--</mat-option>
                           <mat-option *ngFor="let statut of statuts" [value]="statut">
                             {{ statut }}
@@ -53,9 +53,9 @@
                   <tr>
                     <td>
                       <mat-form-field>
-                        <mat-select formControlName="appartements" placeholder="Appartements" multiple [(value)] = "appartements2" >
+                        <mat-select formControlName="appartements" placeholder="Appartements" multiple [(value)]="appartements2">
                           <mat-option>--</mat-option>
-                          <mat-option *ngFor="let appartement of appartements" [value]="appartement.libelle" >
+                          <mat-option *ngFor="let appartement of appartements" [value]="appartement">
                             {{ appartement.libelle }}
                           </mat-option>
                         </mat-select>
@@ -69,14 +69,14 @@
                 </table>
               </div>
               <hr>
-              <div class="mx-auto col-3">
+              <div class="mx-auto col-3" fxLayoutAlign="center">
                 <button mat-raised-button color="primary" (click)="suivantResa()">Suivant</button>
               </div>
             </mat-card>
-           </form>
-          </mat-tab>
-          <mat-tab label="Client" [disabled]="selectedTabClient">
-              <form class="example-form" *ngIf="clientForm" [formGroup]="clientForm">
+          </form>
+        </mat-tab>
+        <mat-tab label="Client" [disabled]="selectedTabClient">
+          <form class="example-form" *ngIf="clientForm" [formGroup]="clientForm">
 
             <mat-card class="col-8 mx-auto cardSearch">
               <mat-card-title>
@@ -89,97 +89,103 @@
                   <tr>
                     <td>
                       <mat-form-field>
-                        <input matInput formControlName="nom" required placeholder="Nom client" >
+                        <input matInput formControlName="nom" maxlength="38" required placeholder="Nom client">
                       </mat-form-field>
                     </td>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <td>
                       <mat-form-field>
-                        <input matInput formControlName="prenom" required placeholder="Pénom client" >
+                        <input matInput formControlName="prenom" maxlength="38" required placeholder="Pénom client">
                       </mat-form-field>
                     </td>
                   </tr>
                   <tr>
                     <td>
                       <mat-form-field>
-                        <input matInput formControlName="adresseEmail" placeholder="Email client" >
+                        <input matInput formControlName="adresseEmail" maxlength="70" placeholder="Email client">
+                        <mat-error *ngIf="clientForm.get('adresseEmail').invalid">{{ getErrorMessageEmail() }}</mat-error>
                       </mat-form-field>
                     </td>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <td>
                       <mat-form-field>
-                        <input matInput formControlName="numeroPieceIdentite" placeholder="Numéro pièce" >
+                        <input matInput formControlName="numeroPieceIdentite" maxlength="38" placeholder="Numéro pièce">
                       </mat-form-field>
                     </td>
                   </tr>
                   <tr>
                     <td>
                       <mat-form-field>
-                        <input matInput formControlName="typePieceIdentite" placeholder="Type pièce">
+                        <mat-select formControlName="typePieceIdentite" placeholder="Type pièce">
+                          <mat-option>--</mat-option>
+                          <mat-option *ngFor="let piece of pieces" [value]="piece">
+                            {{ piece }}
+                          </mat-option>
+                        </mat-select>
                       </mat-form-field>
                     </td>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <td>
                       <mat-form-field>
-                        <input matInput formControlName="telephone" placeholder="Téléphone">
+                        <input matInput formControlName="telephone" maxlength="38" placeholder="Téléphone">
                       </mat-form-field>
                     </td>
                   </tr>
                 </table>
               </div>
               <hr>
-              <div class="mx-auto col-5 row">
+              <div class="mx-auto col-5 row" fxLayoutAlign="center">
                 <button mat-raised-button color="primary" (click)="backTabClient()">Précédent</button>
                 &nbsp;&nbsp;&nbsp;
                 <button mat-raised-button color="primary" (click)="suivantClient()">Suivant</button>
               </div>
 
             </mat-card>
-            </form>
+          </form>
 
-          </mat-tab>
+        </mat-tab>
 
-          <mat-tab label="Adresse" [disabled]="selectedTabAdress">
+        <mat-tab label="Adresse" [disabled]="selectedTabAdress">
 
-              <form class="example-form" *ngIf="adresseForm" [formGroup]="adresseForm">
+          <form class="example-form" *ngIf="adresseForm" [formGroup]="adresseForm">
             <mat-card class="col-8 mx-auto cardSearch">
 
-                <mat-card-title>
-                    <mat-icon fontSet="fa" class="fas fa-address-card mx-auto"></mat-icon>
-                    Adresse
-                  </mat-card-title>
+              <mat-card-title>
+                <mat-icon fontSet="fa" class="fas fa-address-card mx-auto"></mat-icon>
+                Adresse
+              </mat-card-title>
               <div class="mx-auto mat-elevation-z8" style="background-color: white" fxLayoutAlign="center">
                 <table>
                   <tr>
                     <td>
                       <mat-form-field>
-                        <input matInput formControlName="adresse" placeholder="Adresse client" >
+                        <input matInput formControlName="adresse" maxlength="38" placeholder="Adresse client">
                       </mat-form-field>
                     </td>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <td>
                       <mat-form-field>
-                        <textarea matInput formControlName="complementAdresse" placeholder="Complément Adresse" ></textarea>
+                        <textarea matInput formControlName="complementAdresse" maxlength="38" placeholder="Complément Adresse"></textarea>
                       </mat-form-field>
                     </td>
                   </tr>
                   <tr>
                     <td>
                       <mat-form-field>
-                        <input matInput formControlName="codePostal" placeholder="Code Postal" >
+                        <input matInput formControlName="codePostal" maxlength="38" placeholder="Code Postal">
                       </mat-form-field>
                     </td>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <td>
                       <mat-form-field>
-                        <input matInput formControlName="ville" placeholder="Ville" >
+                        <input matInput formControlName="ville" maxlength="38" placeholder="Ville">
                       </mat-form-field>
                     </td>
                   </tr>
                   <tr>
                     <td>
                       <mat-form-field>
-                        <input matInput formControlName="pays" placeholder="Pays" >
+                        <input matInput formControlName="pays" placeholder="Pays">
                       </mat-form-field>
                     </td>
 
@@ -187,16 +193,16 @@
                 </table>
               </div>
               <hr>
-              <div class="mx-auto col-5 row">
+              <div class="mx-auto col-5 row" fxLayoutAlign="center">
                 <button mat-raised-button color="primary" (click)="backTabAddress()">Précédent</button>
                 &nbsp;&nbsp;&nbsp;
-                <button mat-raised-button color="primary" (click)="valider()">Valider</button>
+                <button mat-raised-button color="primary" (click)="valider()" >Valider</button>
               </div>
 
             </mat-card>
-            </form>
-          </mat-tab>
-        </mat-tab-group>
+          </form>
+        </mat-tab>
+      </mat-tab-group>
     </mat-card>
   </div>
 </div>

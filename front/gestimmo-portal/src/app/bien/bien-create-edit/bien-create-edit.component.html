@@ -23,13 +23,13 @@
                       <tr>
                         <td>
                           <mat-form-field>
-                            <input matInput formControlName="adresse" placeholder="Adresse bien" >
+                            <input matInput formControlName="adresse" placeholder="Adresse bien" maxlength="38" >
                           </mat-form-field>
                         </td>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <td>
                           <mat-form-field>
-                            <textarea matInput formControlName="complementAdresse" placeholder="Complément Adresse" ></textarea>
+                            <textarea matInput formControlName="complementAdresse" maxlength="38" placeholder="Complément Adresse" ></textarea>
                           </mat-form-field>
                         </td>
                       </tr>
@@ -42,14 +42,14 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <td>
                           <mat-form-field>
-                            <input matInput formControlName="ville" placeholder="Ville" >
+                            <input matInput formControlName="ville" placeholder="Ville" maxlength="38" >
                           </mat-form-field>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <mat-form-field>
-                            <input matInput formControlName="pays" placeholder="Pays" >
+                            <input matInput formControlName="pays" placeholder="Pays" maxlength="38" >
                           </mat-form-field>
                         </td>
     
@@ -59,7 +59,7 @@
             </form>
           </div>
           <hr>
-            <div class="mx-auto col-4 row">
+            <div class="mx-auto col-4 row" fxLayoutAlign="center">
                 <button mat-raised-button color="primary" (click)="resetForm()">Annuler</button>
                 &nbsp;&nbsp;&nbsp;
                 <button mat-raised-button color="primary" (click)="valider()">Valider</button>

@@ -1,0 +1,7 @@
+com\ag2m\gestimmo\webapp\controller\AnomalieController.class
+com\ag2m\gestimmo\webapp\controller\BienController.class
+com\ag2m\gestimmo\webapp\controller\ReservationController.class
+com\ag2m\gestimmo\webapp\controller\AppartementController.class
+com\ag2m\gestimmo\webapp\controller\ClientController.class
+com\ag2m\gestimmo\webapp\ObjectMapper\HibernateAwareObjectMapper.class
+com\ag2m\gestimmo\webapp\controller\FactureController.class

@@ -391,7 +391,7 @@ public class FactureServiceImplTest extends AbstractCommonTest {
 		// Call service
 		factureCriteria = new FactureCriteria();
 		factureCriteria.setLibelle("Tawfekh3");
-		factureCriteria.setDateCheckIn(new LocalDateTime(2018, 8, 1, 0, 0));
+		factureCriteria.setDateCheckin(new LocalDateTime(2018, 8, 1, 0, 0));
 		List<FactureDto> result = factureService.findFactureByCriteria(factureCriteria);
 
 		// Check
@@ -404,7 +404,7 @@ public class FactureServiceImplTest extends AbstractCommonTest {
 		 ************/
 		// Call service
 		factureCriteria = new FactureCriteria();
-		factureCriteria.setDateCheckOut(new LocalDateTime(2018, 8, 5, 0, 0));
+		factureCriteria.setDateCheckout(new LocalDateTime(2018, 8, 5, 0, 0));
 		result = factureService.findFactureByCriteria(factureCriteria);
 
 		// Check

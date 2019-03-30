@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ApartmentService } from '../apartment.service';
 import { Appartement } from 'src/app/shared/Models/apartment.model';
 import { Bien } from 'src/app/shared/Models/bien.model';
@@ -23,7 +23,8 @@ export class AppartementCreateEditComponent implements OnInit {
   public biens: Bien[];
 
   constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder,
-    private appartementService: ApartmentService, private bienService: BienService) { }
+    private appartementService: ApartmentService, private bienService: BienService,
+    private _router: Router) { }
 
   ngOnInit() {
 
@@ -88,13 +89,23 @@ export class AppartementCreateEditComponent implements OnInit {
 
     if (!this.appartementForm.invalid) {
       this.appartement = this.appartementForm.value;
+      this.appartement.bien = this.appartementForm.controls['bien'].value;
 
 
       console.log(this.appartement)
       this.appartementService.createAppartement(this.appartement).subscribe((appartement: Appartement) => {
         this.appartement = appartement,
-          error => alert(error)
-      })
+          setTimeout(() => {    //<<<---    using ()=> syntax
+            if (this.appartement.id != null) {
+              this._router.navigate(['/appartement/' + this.appartement.id]);
+            }
+          }, 1500);
+      },
+        (error) => {
+          alert(error)
+        })
+
+
     }
   }
 

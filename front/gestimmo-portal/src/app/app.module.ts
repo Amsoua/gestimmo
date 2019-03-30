@@ -33,6 +33,7 @@ import { AppartementDetailComponent } from './apartment/appartement-detail/appar
 import { AccueilComponent } from './accueil/accueil.component';
 import { AuthenticationService } from './authentication/authentication.service';
 import { XhrInterceptor } from './shared/Models/xhrinterceptor';
+import { NumberOnlyDirective } from './shared/directive/number.directive';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { XhrInterceptor } from './shared/Models/xhrinterceptor';
     AppartementRechercheComponent,
     AppartementDetailComponent,
     AccueilComponent,
+    NumberOnlyDirective
   ],
   imports: [
     BrowserModule,

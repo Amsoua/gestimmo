@@ -7,7 +7,7 @@
           <textarea matInput [(ngModel)]="note"></textarea>
         </mat-form-field>
       </div>
-      <div mat-dialog-actions class="col-8 mx-auto">
+      <div mat-dialog-actions class="col-8 mx-auto" fxLayoutAlign="center">
         <button [mat-dialog-close]="note" mat-raised-button color="primary" tabindex="2">Ok</button>
         <button  (click)="onNoClick()" mat-raised-button color="basic" tabindex="-1">Aucun</button>
       </div>

@@ -16,16 +16,17 @@ import lombok.ToString;
  */
 @Getter @Setter
 @ToString
-public class FactureCriteria  {
+public class FactureCriteria {
 
-	private String nomClient;
-	private String prenomClient;
-	private String emailClient;
+	private String nom;
+	private String prenom;
+	private String adresseEmail;
 	private String numeroPiece;
 	private String typePiece;
-	private String telClient;
+	private String telephone;
 	private List<String> statut;
 	private String libelle;
-	private LocalDateTime dateCheckIn;  
-	private LocalDateTime dateCheckOut; 
+	private LocalDateTime dateCheckin;  
+	private LocalDateTime dateCheckout; 
+	private String numero;
 }

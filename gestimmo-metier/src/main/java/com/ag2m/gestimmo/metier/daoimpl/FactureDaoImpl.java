@@ -36,21 +36,27 @@ public class FactureDaoImpl extends AbstractDao<Long, Facture> implements Factur
 		criteria.select(factures);
 
 		// Conditions de filtre sur les paramètres d'entrée
-		if (StringUtils.isNotEmpty(factureCriteria.getNomClient())) {
+		if (StringUtils.isNotEmpty(factureCriteria.getNom())) {
 			Predicate nomCondition = criteriaBuilder.like(criteriaBuilder.upper(factures.get("client").get("nom")),
-					factureCriteria.getNomClient().toUpperCase());
+					factureCriteria.getNom().toUpperCase());
 			predicates.add(nomCondition);
 		}
-		if (StringUtils.isNotEmpty(factureCriteria.getPrenomClient())) {
+		
+		if (StringUtils.isNotEmpty(factureCriteria.getNumero())) {
+			Predicate numCondition = criteriaBuilder.like(criteriaBuilder.upper(factures.get("numeroFacture")),
+					factureCriteria.getNumero().toUpperCase());
+			predicates.add(numCondition);
+		}
+		if (StringUtils.isNotEmpty(factureCriteria.getPrenom())) {
 			Predicate prenomCondition = criteriaBuilder.like(
 					criteriaBuilder.upper(factures.get("client").get("prenom")),
-					factureCriteria.getPrenomClient().toUpperCase());
+					factureCriteria.getPrenom().toUpperCase());
 			predicates.add(prenomCondition);
 		}
-		if (StringUtils.isNotEmpty(factureCriteria.getEmailClient())) {
+		if (StringUtils.isNotEmpty(factureCriteria.getAdresseEmail())) {
 			Predicate emailCondition = criteriaBuilder.like(
 					criteriaBuilder.upper(factures.get("client").get("adresseEmail")),
-					factureCriteria.getEmailClient().toUpperCase());
+					factureCriteria.getAdresseEmail().toUpperCase());
 			predicates.add(emailCondition);
 		}
 		if (StringUtils.isNotEmpty(factureCriteria.getNumeroPiece())) {
@@ -65,10 +71,10 @@ public class FactureDaoImpl extends AbstractDao<Long, Facture> implements Factur
 					factureCriteria.getTypePiece().toUpperCase());
 			predicates.add(typePieceCondition);
 		}
-		if (StringUtils.isNotEmpty(factureCriteria.getTelClient())) {
+		if (StringUtils.isNotEmpty(factureCriteria.getTelephone())) {
 			Predicate telCondition = criteriaBuilder.like(
 					criteriaBuilder.upper(factures.get("client").get("telephone")),
-					factureCriteria.getTelClient().toUpperCase());
+					factureCriteria.getTelephone().toUpperCase());
 			predicates.add(telCondition);
 		}
 
@@ -87,17 +93,17 @@ public class FactureDaoImpl extends AbstractDao<Long, Facture> implements Factur
 		}
 
 		// Date check-in
-		if (factureCriteria.getDateCheckIn() != null) {
+		if (factureCriteria.getDateCheckin() != null) {
 			Join<Object, Object> reservations = factures.join("reservations");
 			Predicate dateCheckinCondition = criteriaBuilder.greaterThanOrEqualTo(reservations.get("dateCheckin"),
-					factureCriteria.getDateCheckIn());
+					factureCriteria.getDateCheckin());
 			predicates.add(dateCheckinCondition);
 		}
 		// Date check-out
-		if (factureCriteria.getDateCheckOut() != null) {
+		if (factureCriteria.getDateCheckout() != null) {
 			Join<Object, Object> reservations = factures.join("reservations");
 			Predicate dateCheckoutCondition = criteriaBuilder.and(criteriaBuilder
-					.lessThanOrEqualTo(reservations.get("dateCheckin"), factureCriteria.getDateCheckOut()));
+					.lessThanOrEqualTo(reservations.get("dateCheckin"), factureCriteria.getDateCheckout()));
 			predicates.add(dateCheckoutCondition);
 		}
 		// where

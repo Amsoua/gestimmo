@@ -122,7 +122,7 @@ public class ReservationController {
 		Optional.ofNullable(reservationDto).orElseThrow(() 
 				-> new TechnicalException(TechnicalErrorMessageConstants.ERREUR_ENTREE_SUPP_NULL));
 		
-		
+		log.info("Liste appartements "+reservationDto.getAppartements().toString());
 		
 		return reservationService.createReservation(reservationDto);
 	}

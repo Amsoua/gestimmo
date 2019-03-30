@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Bien } from 'src/app/shared/Models/bien.model';
 import { Adresse } from 'src/app/shared/Models/address.model';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BienService } from '../bien.service';
 
 @Component({
@@ -21,23 +21,23 @@ export class BienCreateEditComponent implements OnInit {
   private selectedTab = 0;
 
   constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder,
-    private bienService: BienService) { }
+    private bienService: BienService, private _router: Router) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       if (params.index) {
         //this.edit = true;
-        
+
         this.bienService.getBienById(params.index).subscribe((bien: Bien) => {
           this.bien = bien;
-          
+
           this.initBienForm(this.bien);
           this.initAdresseForm(this.bien.adresse)
 
         });
 
       } else {
-        
+
         this.initBienForm();
         this.initAdresseForm();
       }
@@ -84,13 +84,24 @@ export class BienCreateEditComponent implements OnInit {
       console.log(this.bien)
       this.bienService.createBien(this.bien).subscribe((bien: Bien) => {
         this.bien = bien,
-          error => alert(error)
-      })
+          this._router.navigate(['bien']);
+      },
+        (error) => {
+          alert(error)
+        })
+      setTimeout(() => {    //<<<---    using ()=> syntax
+        this._router.navigate(['/bien']);
+      }, 1500);
+
     }
   }
 
-  public resetForm(){
+  public resetForm() {
     this.bienForm.reset();
     this.adresseForm.reset();
+  }
+
+  public getUrl(): string[] {
+    return ['/bien'];
   }
 }

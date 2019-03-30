@@ -1,17 +1,20 @@
 package com.ag2m.gestimmo.webapp.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ag2m.gestimmo.metier.constants.TechnicalErrorMessageConstants;
 import com.ag2m.gestimmo.metier.dto.AppartementDto;
 import com.ag2m.gestimmo.metier.exception.TechnicalException;
 import com.ag2m.gestimmo.metier.service.AppartementService;
@@ -73,17 +76,16 @@ public class AppartementController {
 
 	/**
 	 * Crée un nouvel appartement
+	 * @throws TechnicalException 
 	 * 
 	 */
-	@RequestMapping(value = "/appartements/save/idBien/{id}", method = RequestMethod.POST)
-	public @ResponseBody void saveAppartement(@PathVariable("id") long idBien) {
+	@RequestMapping(value = "/appartements/create", method = RequestMethod.POST)
+	public @ResponseBody AppartementDto saveAppartement(@RequestBody AppartementDto appartementDto) throws TechnicalException  {
 
-		// Bien bien = bienService.findById(idBien);
-		// Appartement appartement = new Appartement();
-		// appartement.setLibelle("Gokhou Mbath");
-		// appartement.setBien(bien);
-		// appartement.setType(EnumTypeAppartement.T2.getType());
-		// appartementService.createAppartement(appartement);
+		Optional.ofNullable(appartementDto).orElseThrow(() 
+				-> new TechnicalException(TechnicalErrorMessageConstants.ERREUR_ENTREE_SUPP_NULL));
+		
+		return appartementService.createAppartement(appartementDto);
 
 	}
 
